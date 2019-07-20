@@ -145,8 +145,8 @@ public class GenerateLevel : MonoBehaviour
         Player.transform.position = spawn; // starting location of the player object
     }
 
-    public bool checkTile()
-    {
-        if ()
-    }
+    //public bool checkTile()
+    //{
+    //    if ()
+    //}
 }
