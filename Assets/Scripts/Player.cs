@@ -25,13 +25,13 @@ public class Player : MonoBehaviour
 
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
 
-        RaycastHit hit;
-        if (!Physics.Raycast(transform.position, movement, 1.0f, 0) && movement.x > 0)
-        {
-            transform.position = transform.position + new Vector3(1.0f, 0f, 0f);
-        }
+        //RaycastHit hit;
+        //if (!Physics.Raycast(transform.position, movement, 1.0f, 0) && movement.x > 0)
+        //{
+        //    transform.position = transform.position + new Vector3(1.0f, 0f, 0f);
+        //}
 
-        //rb2d.AddForce(movement * speed);
+        rb2d.AddForce(movement * speed);
         
         ////
     }
