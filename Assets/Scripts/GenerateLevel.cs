@@ -21,6 +21,7 @@ public class GenerateLevel : MonoBehaviour
     private List<Vector3> startingSpots; // the floorTiles which were the start or end of sequences (always on the border of the game board)
 
     public GameObject Player;
+    public GameObject Enemy;
 
     void LevelLayout(int level)
     {
@@ -134,6 +135,8 @@ public class GenerateLevel : MonoBehaviour
         LevelLayout(level); // generate wall and floor tile
 
         SpawnPlayer(); // find a spot to spawn the player
+
+        SpawnEnemy(); // find a spot to spawn the enemy
     }
 
     public void SpawnPlayer()
@@ -145,8 +148,12 @@ public class GenerateLevel : MonoBehaviour
         Player.transform.position = spawn; // starting location of the player object
     }
 
-    //public bool checkTile()
-    //{
-    //    if ()
-    //}
+    public void SpawnEnemy()
+    {
+        int index = Random.Range(0, startingSpots.Count); // remove from list (don't want player and enemy spawning on top of each other!)
+        Vector3 spawn = startingSpots[index];
+        startingSpots.Remove(startingSpots[index]); // starting location of the enemy object
+
+        Enemy.transform.position = spawn;
+    }
 }
