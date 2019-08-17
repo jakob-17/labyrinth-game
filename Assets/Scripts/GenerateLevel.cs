@@ -19,6 +19,7 @@ public class GenerateLevel : MonoBehaviour
     private List<int> ySpots;
 
     private List<Vector3> startingSpots; // the floorTiles which were the start or end of sequences (always on the border of the game board)
+    public List<Vector3> floorTiles;
 
     public GameObject Player;
     public GameObject Enemy;
@@ -30,6 +31,7 @@ public class GenerateLevel : MonoBehaviour
         xSpots = new List<int>();
         ySpots = new List<int>();
         startingSpots = new List<Vector3>();
+        floorTiles = new List<Vector3>();
         for (int x = -Width; x < Width; x++) // think about a graph w/ 4 quadrants
         {
             for (int y = -Length; y < Length; y++)
@@ -48,6 +50,7 @@ public class GenerateLevel : MonoBehaviour
                 do { yCor = Random.Range(-Length, Length); } while (ySpots.Contains(yCor)); // ensure that this coordinate hasn't yet been a starting spot
                 Floor.SetTile(new Vector3Int(-Width, yCor, 0), floorTile);
                 Floor.SetColliderType(new Vector3Int(-Width, yCor, 0), Tile.ColliderType.None); //
+                floorTiles.Add(Floor.GetCellCenterWorld(new Vector3Int(-Width, yCor, 0))); ////
                 startingSpots.Add(Floor.GetCellCenterWorld(new Vector3Int(-Width, yCor, 0)));
                 ySpots.Add(yCor);
                 for (int xCor = -Width; xCor < Width - 1; xCor++)
@@ -62,6 +65,7 @@ public class GenerateLevel : MonoBehaviour
                             {
                                 Floor.SetTile(new Vector3Int(xCor, --yCor, 0), floorTile); // tile down
                                 Floor.SetColliderType(new Vector3Int(xCor, yCor, 0), Tile.ColliderType.None); //
+                                floorTiles.Add(Floor.GetCellCenterWorld(new Vector3Int(xCor, yCor, 0))); ////
                                 upOrDown = Random.Range(0, 2);
                             }
                         }
@@ -71,13 +75,16 @@ public class GenerateLevel : MonoBehaviour
                             {
                                 Floor.SetTile(new Vector3Int(xCor, ++yCor, 0), floorTile); // tile up
                                 Floor.SetColliderType(new Vector3Int(xCor, yCor, 0), Tile.ColliderType.None); //
+                                floorTiles.Add(Floor.GetCellCenterWorld(new Vector3Int(xCor, yCor, 0))); ////
                                 upOrDown = Random.Range(0, 2);
                             }
                         }
                         Floor.SetColliderType(new Vector3Int(xCor, yCor, 0), Tile.ColliderType.None); //
+                        floorTiles.Add(Floor.GetCellCenterWorld(new Vector3Int(xCor, yCor, 0))); ////
                     }
                     Floor.SetTile(new Vector3Int(xCor + 1, yCor, 0), floorTile);
                     Floor.SetColliderType(new Vector3Int(xCor + 1, yCor, 0), Tile.ColliderType.None); //
+                    floorTiles.Add(Floor.GetCellCenterWorld(new Vector3Int(xCor + 1, yCor, 0))); ////
                     if (xCor + 1 == Width - 1)
                     {
                         startingSpots.Add(Floor.GetCellCenterWorld(new Vector3Int(Width - 1, yCor, 0))); // the last tile placed for this sequence
@@ -91,6 +98,7 @@ public class GenerateLevel : MonoBehaviour
                 do { xCor = Random.Range(-Width, Width); } while (xSpots.Contains(xCor)); // ensure that this coordinate hasn't yet been a starting spot
                 Floor.SetTile(new Vector3Int(xCor, -Length, 0), floorTile);
                 Floor.SetColliderType(new Vector3Int(xCor, -Length, 0), Tile.ColliderType.None); //
+                floorTiles.Add(Floor.GetCellCenterWorld(new Vector3Int(xCor, -Length, 0))); ////
                 startingSpots.Add(Floor.GetCellCenterWorld(new Vector3Int(xCor, -Length, 0)));
                 xSpots.Add(xCor);
                 for (int yCor = -Length; yCor < Length - 1; yCor++)
@@ -105,6 +113,7 @@ public class GenerateLevel : MonoBehaviour
                             {
                                 Floor.SetTile(new Vector3Int(--xCor, yCor, 0), floorTile); // tile left
                                 Floor.SetColliderType(new Vector3Int(xCor, yCor, 0), Tile.ColliderType.None); //
+                                floorTiles.Add(Floor.GetCellCenterWorld(new Vector3Int(xCor, yCor, 0))); ////
                                 rightOrLeft = Random.Range(0, 2);
                             }
                         }
@@ -114,13 +123,16 @@ public class GenerateLevel : MonoBehaviour
                             {
                                 Floor.SetTile(new Vector3Int(++xCor, yCor, 0), floorTile); // tile right
                                 Floor.SetColliderType(new Vector3Int(xCor, yCor, 0), Tile.ColliderType.None); //
+                                floorTiles.Add(Floor.GetCellCenterWorld(new Vector3Int(xCor, yCor, 0))); ////
                                 rightOrLeft = Random.Range(0, 2);
                             }
                         }
                         Floor.SetColliderType(new Vector3Int(xCor, yCor, 0), Tile.ColliderType.None); //
+                        floorTiles.Add(Floor.GetCellCenterWorld(new Vector3Int(xCor, yCor, 0))); ////
                     }
                     Floor.SetTile(new Vector3Int(xCor, yCor + 1, 0), floorTile);
                     Floor.SetColliderType(new Vector3Int(xCor, yCor + 1, 0), Tile.ColliderType.None); //
+                    floorTiles.Add(Floor.GetCellCenterWorld(new Vector3Int(xCor, yCor + 1, 0))); ////
                     if (yCor + 1 == Length - 1)
                     {
                         startingSpots.Add(Floor.GetCellCenterWorld(new Vector3Int(xCor, Length - 1, 0))); // the last tile placed for this sequence
@@ -144,7 +156,7 @@ public class GenerateLevel : MonoBehaviour
         int index = Random.Range(0, startingSpots.Count);
         Vector3 spawn = startingSpots[index];
         startingSpots.Remove(startingSpots[index]); // remove from list (don't want player and enemy spawning on top of each other!)
-        
+
         Player.transform.position = spawn; // starting location of the player object
     }
 
