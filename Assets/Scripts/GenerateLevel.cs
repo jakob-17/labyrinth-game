@@ -148,7 +148,7 @@ public class GenerateLevel : MonoBehaviour
 
         SpawnPlayer(); // find a spot to spawn the player
 
-        SpawnEnemy(); // find a spot to spawn the enemy
+        SpawnEnemy(); // find a spot to spawn the enemy       
     }
 
     public void SpawnPlayer()
