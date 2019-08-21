@@ -18,17 +18,24 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        currentDir = dirs[UnityEngine.Random.Range(0, 4)];
+        rb2d.velocity = currentDir * speed;
     }
 
     // Update is called once per frame
     void Update()
     {
-       if (rb2d.velocity == Vector2.zero)
+        RaycastHit2D hit = Physics2D.Raycast(this.transform.position, currentDir);
+        if (hit.collider != null && hit.distance < 0.001f)
         {
-            int index = UnityEngine.Random.Range(0, 3);
+            rb2d.velocity = Vector2.zero;
+        }
+        if (rb2d.velocity == Vector2.zero)
+        {
+            int index;
+            do { index = UnityEngine.Random.Range(0, 4); } while (dirs[index] == currentDir);
             currentDir = dirs[index];
-            rb2d.velocity = dirs[index] * speed;
+            rb2d.velocity = currentDir * speed;
         }
     }
 }
