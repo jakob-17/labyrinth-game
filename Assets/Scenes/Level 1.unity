@@ -153,6 +153,7 @@ MonoBehaviour:
   tc2d: {fileID: 542688008}
   wallTile: {fileID: 11400000, guid: 663eecc21752bc1478cb3da7f73541d9, type: 2}
   floorTile: {fileID: 11400000, guid: efa49cdc70adb104e8e2c764d16d4deb, type: 2}
+  floorTiles: []
   Player: {fileID: 1215602532}
   Enemy: {fileID: 1602711705}
 --- !u!4 &409049022
@@ -3385,6 +3386,8 @@ MonoBehaviour:
   rend: {fileID: 1215602534}
   rb2d: {fileID: 1215602536}
   speed: 2.5
+  currentLevel: {fileID: 409049021}
+  Node: {fileID: 0}
 --- !u!212 &1215602534
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3676,7 +3679,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rend: {fileID: 1602711709}
   rb2d: {fileID: 1602711707}
-  speed: 1
+  speed: 2
 --- !u!212 &1602711709
 SpriteRenderer:
   m_ObjectHideFlags: 0

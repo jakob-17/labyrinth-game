@@ -10,10 +10,16 @@ public class Player : MonoBehaviour
 
     public float speed;
 
+    public GenerateLevel currentLevel;
+
+    private List<Vector3> Floor;
+
+    public GameObject Node;
+
     // Start is called before the first frame update
     void Start()
     {
-        // rb2d = GetComponent<Rigidbody2D>();
+        
     }
 
     // FixedUpdate is called at a fixed interval and is independent of frame rate. Put physics code here.
